@@ -147,7 +147,7 @@ func TestUpload(t *testing.T) {
 			bucketConf: BucketConfiguration{
 				Region: s3Region,
 			},
-			hasErr: true,
+			dryRunNoErr: true,
 		},
 		{
 			name: "NilBucketConfiguration",
@@ -180,6 +180,18 @@ func TestUpload(t *testing.T) {
 				Region: s3Region,
 			},
 			hasErr: true,
+		},
+		{
+			name: "BucketSpecifiedFromConfiguration",
+			artifact: &TestArtifact{
+				Path:      "bson_example.bson",
+				LocalFile: "testdata/bson_example.bson",
+			},
+			bucketConf: BucketConfiguration{
+				Name:   "bucket",
+				Region: s3Region,
+			},
+			dryRunNoErr: true,
 		},
 		{
 			name: "NoRegionSpecified",
